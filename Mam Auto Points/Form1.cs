@@ -14,11 +14,9 @@ namespace MAMAutoPoints
 {
     public class Form1 : Form
     {
-        private const string WORKDIR = "C:/Python/Projects/MAM";
         private const string MAM_API_ENDPOINT = "https://www.myanonamouse.net/jsonLoad.php";
         private const string POINTS_URL = "https://www.myanonamouse.net/json/bonusBuy.php/?spendtype=upload&amount=";
         private const string VIP_URL_TEMPLATE = "https://www.myanonamouse.net/json/bonusBuy.php/?spendtype=VIP&duration=max&_={timestamp}";
-        private const string FALLBACK_MAMID = "AeYhtAn-GwOqzdvTnrQZdaBdOjcpHj0f4aIn_FU_8uZDwcV-SO1B4inhKBtP5pr1euz2LBoTpw1viu9mlyPlVplavUwjAnk0EnRNCu12nyCtVCVZcBGpyomOZV09TVnCRTgW-6c9RkMDHX1Dld_6MaENOTGk89QPrlmbP-MVyD6thV5YAtaOz3BR0ercaulaNBwNrjCfTMqvnG8SRNIYTyZ6FbehGW4j0Eivj6i-GuZOdyZQPxzTo_a0lk7G3xsxm0_FNbTRXuryiA1MxfUBM-jZ3Lq4LDI-x-Du";
 
         private TextBox textBoxLog = null!;
         private TextBox textBoxPointsBuffer = null!;
@@ -56,13 +54,11 @@ namespace MAMAutoPoints
 
         private void InitializeComponent()
         {
-            // Dark mode settings.
             this.Text = "MAM Auto Points";
             this.Size = new Size(800, 720);
             this.BackColor = Color.FromArgb(30, 30, 30);
             this.ForeColor = Color.White;
 
-            // Log textbox.
             textBoxLog = new TextBox
             {
                 Multiline = true,
@@ -76,7 +72,6 @@ namespace MAMAutoPoints
             };
             this.Controls.Add(textBoxLog);
 
-            // User Information group.
             groupBoxUserInfo = new GroupBox
             {
                 Text = "User Information",
@@ -177,7 +172,6 @@ namespace MAMAutoPoints
             };
             groupBoxUserInfo.Controls.Add(labelRatio);
 
-            // Settings group.
             GroupBox groupBoxSettings = new GroupBox
             {
                 Text = "Settings",
@@ -188,7 +182,6 @@ namespace MAMAutoPoints
             };
             this.Controls.Add(groupBoxSettings);
 
-            // Buy Max VIP? checkbox.
             checkBoxBuyVip = new CheckBox
             {
                 Text = "Buy Max VIP?",
@@ -199,7 +192,6 @@ namespace MAMAutoPoints
             };
             groupBoxSettings.Controls.Add(checkBoxBuyVip);
 
-            // Points Buffer: 10k Recommended labels.
             Label labelPointsBufferPrefix = new Label
             {
                 Text = "Points Buffer:",
@@ -229,7 +221,6 @@ namespace MAMAutoPoints
             };
             groupBoxSettings.Controls.Add(textBoxPointsBuffer);
 
-            // Next Run Delay.
             Label labelNextRun = new Label
             {
                 Text = "Next Run Delay (hours):",
@@ -249,7 +240,6 @@ namespace MAMAutoPoints
             };
             groupBoxSettings.Controls.Add(textBoxNextRun);
 
-            // Cookies File.
             Label labelCookieFile = new Label
             {
                 Text = "Cookies File:",
@@ -291,7 +281,6 @@ namespace MAMAutoPoints
             buttonEditCookie.Click += ButtonEditCookie_Click;
             groupBoxSettings.Controls.Add(buttonEditCookie);
 
-            // Totals group.
             GroupBox groupBoxTotals = new GroupBox
             {
                 Text = "Totals",
@@ -318,8 +307,6 @@ namespace MAMAutoPoints
             };
             groupBoxTotals.Controls.Add(labelTotalGB);
 
-            // Remove Days Bought.
-            // Cumulative Points Spent.
             Label labelCumulativePoints = new Label
             {
                 Text = "Cumulative Points Spent:",
@@ -352,7 +339,6 @@ namespace MAMAutoPoints
             };
             groupBoxTotals.Controls.Add(labelNextRunCountdown);
 
-            // Bottom buttons.
             buttonRun = new Button
             {
                 Text = "Run Script",
@@ -475,7 +461,6 @@ namespace MAMAutoPoints
 
         private void ButtonRun_Click(object? sender, EventArgs e)
         {
-            // If paused, reset pause state before running.
             if (paused)
             {
                 paused = false;
@@ -758,7 +743,6 @@ namespace MAMAutoPoints
             try
             {
                 AppendLog("Starting MAM automation script.");
-                Directory.SetCurrentDirectory(WORKDIR);
                 var cookies = await LoadCookies(cookieFile);
                 SetNextRun(DateTime.Now.AddHours(nextRunHours));
                 var summary = await GetUserSummary(cookies);
@@ -766,24 +750,8 @@ namespace MAMAutoPoints
                 string mam_uid = await GetSessionId(cookies);
                 if (string.IsNullOrEmpty(mam_uid))
                 {
-                    AppendLog("Session invalid.");
-                    if (string.IsNullOrEmpty(FALLBACK_MAMID))
-                    {
-                        AppendLog("Please update the FALLBACK_MAMID in the script.");
-                        return;
-                    }
-                    cookies["mam_id"] = FALLBACK_MAMID;
-                    mam_uid = await GetSessionId(cookies);
-                    if (string.IsNullOrEmpty(mam_uid))
-                    {
-                        AppendLog("Cannot create new session!");
-                        return;
-                    }
-                    else
-                    {
-                        AppendLog("New session created, please restart the script.");
-                        return;
-                    }
+                    AppendLog("Session invalid. Please check your cookie file.");
+                    return;
                 }
                 else
                 {
@@ -800,12 +768,10 @@ namespace MAMAutoPoints
                 int initial_points = points;
                 TimeSpan totalVipTime = TimeSpan.Zero;
                 int totalUploadGB = 0;
-                DateTime now = DateTime.Now;
                 if (vipEnabled)
                 {
                     DateTime vipExpiry = await GetVipExpiry(cookies);
                     AppendLog($"Current VIP expiry: {vipExpiry:MMM dd, yyyy h:mm tt}");
-                    // Buy VIP exactly once, regardless of outcome.
                     string timestamp = ((long)(DateTime.Now - new DateTime(1970, 1, 1)).TotalMilliseconds).ToString();
                     string vipUrl = VIP_URL_TEMPLATE.Replace("{timestamp}", timestamp);
                     var vipResult = await SendCurlRequest(vipUrl, cookies);

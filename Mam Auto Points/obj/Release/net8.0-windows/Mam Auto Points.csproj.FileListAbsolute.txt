@@ -9,6 +9,7 @@ C:\Users\randy\source\repos\Mam Auto Points\Mam Auto Points\obj\Release\net8.0-w
 C:\Users\randy\source\repos\Mam Auto Points\Mam Auto Points\obj\Release\net8.0-windows\Mam Auto Points.AssemblyInfoInputs.cache
 C:\Users\randy\source\repos\Mam Auto Points\Mam Auto Points\obj\Release\net8.0-windows\Mam Auto Points.AssemblyInfo.cs
 C:\Users\randy\source\repos\Mam Auto Points\Mam Auto Points\obj\Release\net8.0-windows\Mam Auto Points.csproj.CoreCompileInputs.cache
+C:\Users\randy\source\repos\Mam Auto Points\Mam Auto Points\obj\Release\net8.0-windows\Mam Auto Points.sourcelink.json
 C:\Users\randy\source\repos\Mam Auto Points\Mam Auto Points\obj\Release\net8.0-windows\Mam Auto Points.dll
 C:\Users\randy\source\repos\Mam Auto Points\Mam Auto Points\obj\Release\net8.0-windows\refint\Mam Auto Points.dll
 C:\Users\randy\source\repos\Mam Auto Points\Mam Auto Points\obj\Release\net8.0-windows\Mam Auto Points.pdb
