@@ -1,0 +1,16 @@
+C:\Users\randy\source\repos\Mam Auto Points\Mam Auto Points\obj\Debug\net8.0-windows\MAMAutoPoints.Form1.resources
+C:\Users\randy\source\repos\Mam Auto Points\Mam Auto Points\obj\Debug\net8.0-windows\Mam Auto Points.csproj.GenerateResource.cache
+C:\Users\randy\source\repos\Mam Auto Points\Mam Auto Points\obj\Debug\net8.0-windows\Mam Auto Points.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\randy\source\repos\Mam Auto Points\Mam Auto Points\obj\Debug\net8.0-windows\Mam Auto Points.AssemblyInfoInputs.cache
+C:\Users\randy\source\repos\Mam Auto Points\Mam Auto Points\obj\Debug\net8.0-windows\Mam Auto Points.AssemblyInfo.cs
+C:\Users\randy\source\repos\Mam Auto Points\Mam Auto Points\obj\Debug\net8.0-windows\Mam Auto Points.csproj.CoreCompileInputs.cache
+C:\Users\randy\source\repos\Mam Auto Points\Mam Auto Points\bin\Debug\net8.0-windows\Mam Auto Points.exe
+C:\Users\randy\source\repos\Mam Auto Points\Mam Auto Points\bin\Debug\net8.0-windows\Mam Auto Points.deps.json
+C:\Users\randy\source\repos\Mam Auto Points\Mam Auto Points\bin\Debug\net8.0-windows\Mam Auto Points.runtimeconfig.json
+C:\Users\randy\source\repos\Mam Auto Points\Mam Auto Points\bin\Debug\net8.0-windows\Mam Auto Points.dll
+C:\Users\randy\source\repos\Mam Auto Points\Mam Auto Points\bin\Debug\net8.0-windows\Mam Auto Points.pdb
+C:\Users\randy\source\repos\Mam Auto Points\Mam Auto Points\obj\Debug\net8.0-windows\Mam Auto Points.dll
+C:\Users\randy\source\repos\Mam Auto Points\Mam Auto Points\obj\Debug\net8.0-windows\refint\Mam Auto Points.dll
+C:\Users\randy\source\repos\Mam Auto Points\Mam Auto Points\obj\Debug\net8.0-windows\Mam Auto Points.pdb
+C:\Users\randy\source\repos\Mam Auto Points\Mam Auto Points\obj\Debug\net8.0-windows\Mam Auto Points.genruntimeconfig.cache
+C:\Users\randy\source\repos\Mam Auto Points\Mam Auto Points\obj\Debug\net8.0-windows\ref\Mam Auto Points.dll
