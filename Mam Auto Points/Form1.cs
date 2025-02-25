@@ -72,6 +72,7 @@ namespace MAMAutoPoints
             };
             this.Controls.Add(textBoxLog);
 
+            // User Information Group
             groupBoxUserInfo = new GroupBox
             {
                 Text = "User Information",
@@ -172,6 +173,7 @@ namespace MAMAutoPoints
             };
             groupBoxUserInfo.Controls.Add(labelRatio);
 
+            // Settings Group
             GroupBox groupBoxSettings = new GroupBox
             {
                 Text = "Settings",
@@ -182,10 +184,14 @@ namespace MAMAutoPoints
             };
             this.Controls.Add(groupBoxSettings);
 
+            // Left-align controls using fixed X coordinates
+            int labelX = 10;
+            int textBoxX = 150;
+
             checkBoxBuyVip = new CheckBox
             {
                 Text = "Buy Max VIP?",
-                Location = new Point(10, 20),
+                Location = new Point(labelX, 20),
                 AutoSize = true,
                 Checked = true,
                 ForeColor = Color.LightGreen
@@ -195,64 +201,57 @@ namespace MAMAutoPoints
             Label labelPointsBufferPrefix = new Label
             {
                 Text = "Points Buffer:",
-                Location = new Point(10, 50),
+                Location = new Point(labelX, 50),
                 AutoSize = true,
-                ForeColor = Color.LightBlue
+                ForeColor = Color.LightBlue,
+                TextAlign = ContentAlignment.MiddleLeft
             };
             groupBoxSettings.Controls.Add(labelPointsBufferPrefix);
 
-            Label labelPointsBufferSuffix = new Label
-            {
-                Text = "10k Recommended",
-                Location = new Point(labelPointsBufferPrefix.Right + 5, labelPointsBufferPrefix.Top),
-                AutoSize = true,
-                Font = new Font(this.Font, FontStyle.Italic),
-                ForeColor = Color.LightBlue
-            };
-            groupBoxSettings.Controls.Add(labelPointsBufferSuffix);
-
             textBoxPointsBuffer = new TextBox
             {
-                Location = new Point(labelPointsBufferSuffix.Right + 5, labelPointsBufferSuffix.Top - 3),
+                Location = new Point(textBoxX, 50),
                 Size = new Size(100, 23),
                 BackColor = Color.Black,
                 ForeColor = Color.White,
-                Text = ""
+                Text = "10000"
             };
             groupBoxSettings.Controls.Add(textBoxPointsBuffer);
 
             Label labelNextRun = new Label
             {
                 Text = "Next Run Delay (hours):",
-                Location = new Point(10, 85),
+                Location = new Point(labelX, 80),
                 AutoSize = true,
-                ForeColor = Color.Plum
+                ForeColor = Color.Plum,
+                TextAlign = ContentAlignment.MiddleLeft
             };
             groupBoxSettings.Controls.Add(labelNextRun);
 
             textBoxNextRun = new TextBox
             {
-                Location = new Point(160, 82),
-                Size = new Size(60, 23),
+                Location = new Point(textBoxX, 80),
+                Size = new Size(100, 23),
                 BackColor = Color.Black,
                 ForeColor = Color.White,
-                Text = ""
+                Text = "12"
             };
             groupBoxSettings.Controls.Add(textBoxNextRun);
 
             Label labelCookieFile = new Label
             {
                 Text = "Cookies File:",
-                Location = new Point(10, 115),
+                Location = new Point(labelX, 110),
                 AutoSize = true,
-                ForeColor = Color.Orange
+                ForeColor = Color.Orange,
+                TextAlign = ContentAlignment.MiddleLeft
             };
             groupBoxSettings.Controls.Add(labelCookieFile);
 
             textBoxCookieFile = new TextBox
             {
-                Location = new Point(120, 112),
-                Size = new Size(150, 23),
+                Location = new Point(textBoxX, 110),
+                Size = new Size(100, 23),
                 BackColor = Color.Black,
                 ForeColor = Color.White,
                 Text = ""
@@ -261,8 +260,8 @@ namespace MAMAutoPoints
 
             buttonBrowseCookie = new Button
             {
-                Text = "Browse",
-                Location = new Point(280, 110),
+                Text = "Select File",
+                Location = new Point(textBoxX + textBoxCookieFile.Width + 5, 110),
                 Size = new Size(75, 23),
                 BackColor = Color.DimGray,
                 ForeColor = Color.White
@@ -273,7 +272,7 @@ namespace MAMAutoPoints
             buttonEditCookie = new Button
             {
                 Text = "Edit Cookie",
-                Location = new Point(10, 140),
+                Location = new Point(textBoxX, 140),
                 Size = new Size(140, 30),
                 BackColor = Color.DimGray,
                 ForeColor = Color.White
@@ -281,6 +280,7 @@ namespace MAMAutoPoints
             buttonEditCookie.Click += ButtonEditCookie_Click;
             groupBoxSettings.Controls.Add(buttonEditCookie);
 
+            // Totals Group
             GroupBox groupBoxTotals = new GroupBox
             {
                 Text = "Totals",
@@ -339,6 +339,7 @@ namespace MAMAutoPoints
             };
             groupBoxTotals.Controls.Add(labelNextRunCountdown);
 
+            // Bottom buttons
             buttonRun = new Button
             {
                 Text = "Run Script",
@@ -626,38 +627,21 @@ namespace MAMAutoPoints
                 this.Invoke(new Action<Dictionary<string, JsonElement>>(UpdateUserInfo), summary);
                 return;
             }
-            if (summary.TryGetValue("username", out JsonElement userElem))
-                labelUserName.Text = userElem.GetString() ?? "N/A";
-            else
-                labelUserName.Text = "N/A";
+            labelUserName.Text = summary.TryGetValue("username", out JsonElement userElem) ? userElem.GetString() ?? "N/A" : "N/A";
 
             if (summary.TryGetValue("vip_until", out JsonElement vipElem))
             {
                 string vipStr = vipElem.GetString() ?? "";
-                if (DateTime.TryParse(vipStr, out DateTime vipDate))
-                    labelVipExpires.Text = vipDate.ToString("MMM dd, yyyy h:mm tt");
-                else
-                    labelVipExpires.Text = vipStr;
+                labelVipExpires.Text = DateTime.TryParse(vipStr, out DateTime vipDate) ? vipDate.ToString("MMM dd, yyyy h:mm tt") : vipStr;
             }
             else
             {
                 labelVipExpires.Text = "N/A";
             }
 
-            if (summary.TryGetValue("downloaded", out JsonElement dlElem))
-                labelDownloaded.Text = dlElem.GetString() ?? "N/A";
-            else
-                labelDownloaded.Text = "N/A";
-
-            if (summary.TryGetValue("uploaded", out JsonElement ulElem))
-                labelUploaded.Text = ulElem.GetString() ?? "N/A";
-            else
-                labelUploaded.Text = "N/A";
-
-            if (summary.TryGetValue("ratio", out JsonElement ratioElem))
-                labelRatio.Text = ratioElem.ToString();
-            else
-                labelRatio.Text = "N/A";
+            labelDownloaded.Text = summary.TryGetValue("downloaded", out JsonElement dlElem) ? dlElem.GetString() ?? "N/A" : "N/A";
+            labelUploaded.Text = summary.TryGetValue("uploaded", out JsonElement ulElem) ? ulElem.GetString() ?? "N/A" : "N/A";
+            labelRatio.Text = summary.TryGetValue("ratio", out JsonElement ratioElem) ? ratioElem.ToString() : "N/A";
         }
 
         private async Task<int> GetSeedBonus(Dictionary<string, string> cookies, string mam_uid)
@@ -667,7 +651,6 @@ namespace MAMAutoPoints
                 string url = "https://www.myanonamouse.net/jsonLoad.php?id=" + mam_uid;
                 var response = await client.GetAsync(url);
                 string responseContent = await response.Content.ReadAsStringAsync();
-                AppendLog("Fetched seed bonus.");
                 response.EnsureSuccessStatusCode();
                 using (JsonDocument doc = JsonDocument.Parse(responseContent))
                 {
@@ -708,7 +691,6 @@ namespace MAMAutoPoints
                 {
                     var response = await client.GetAsync(url);
                     string json = await response.Content.ReadAsStringAsync();
-                    AppendLog($"[API Response] {json}");
                     if (!response.IsSuccessStatusCode)
                     {
                         AppendLog($"Error: Status code {response.StatusCode}");
@@ -740,6 +722,9 @@ namespace MAMAutoPoints
                 return;
             }
             automationRunning = true;
+            bool vipBought = false;
+            int totalUploadGB = 0;
+
             try
             {
                 AppendLog("Starting MAM automation script.");
@@ -753,10 +738,7 @@ namespace MAMAutoPoints
                     AppendLog("Session invalid. Please check your cookie file.");
                     return;
                 }
-                else
-                {
-                    AppendLog("Existing session valid.");
-                }
+                AppendLog("Existing session valid.");
                 AppendLog("Collecting current points.");
                 int points = await GetSeedBonus(cookies, mam_uid);
                 if (points == 0)
@@ -765,62 +747,62 @@ namespace MAMAutoPoints
                     return;
                 }
                 AppendLog($"Current points: {points}");
-                int initial_points = points;
-                TimeSpan totalVipTime = TimeSpan.Zero;
-                int totalUploadGB = 0;
+
                 if (vipEnabled)
                 {
                     DateTime vipExpiry = await GetVipExpiry(cookies);
-                    AppendLog($"Current VIP expiry: {vipExpiry:MMM dd, yyyy h:mm tt}");
-                    string timestamp = ((long)(DateTime.Now - new DateTime(1970, 1, 1)).TotalMilliseconds).ToString();
-                    string vipUrl = VIP_URL_TEMPLATE.Replace("{timestamp}", timestamp);
-                    var vipResult = await SendCurlRequest(vipUrl, cookies);
-                    if (vipResult.ContainsKey("success") && vipResult["success"].ValueKind == JsonValueKind.True)
+                    TimeSpan vipRemaining = vipExpiry - DateTime.Now;
+                    AppendLog($"Current VIP expiry: {vipExpiry:MMM dd, yyyy h:mm tt} ({vipRemaining.TotalDays:F1} days remaining)");
+                    if (vipRemaining.TotalDays > 83)
                     {
-                        AppendLog("VIP purchase successful!");
-                        totalVipTime += TimeSpan.FromDays(30);
+                        AppendLog("VIP purchase not required; current VIP period exceeds threshold (83 days).");
                     }
                     else
                     {
-                        AppendLog("VIP purchase failed or not available.");
+                        string timestamp = ((long)(DateTime.Now - new DateTime(1970, 1, 1)).TotalMilliseconds).ToString();
+                        string vipUrl = VIP_URL_TEMPLATE.Replace("{timestamp}", timestamp);
+                        var vipResult = await SendCurlRequest(vipUrl, cookies);
+                        if (vipResult.ContainsKey("success") && vipResult["success"].ValueKind == JsonValueKind.True)
+                        {
+                            AppendLog("VIP purchase successful!");
+                            vipBought = true;
+                        }
+                        else
+                        {
+                            AppendLog("VIP purchase failed or not available.");
+                        }
                     }
                 }
+
                 int[] gbValues = new int[] { 100, 20, 5, 1 };
                 foreach (int gb in gbValues)
                 {
-                    AppendLog($"Checking to spend {gb} GB");
                     int upload_required = gb * 500 + pointsBuffer;
                     while (points > upload_required)
                     {
-                        AppendLog($"{points} is more than {upload_required} - buying {gb} GB of upload");
+                        AppendLog($"{points} > {upload_required} - purchasing {gb} GB of upload");
                         string timestamp = ((long)(DateTime.Now - new DateTime(1970, 1, 1)).TotalMilliseconds).ToString();
                         string url = POINTS_URL + gb.ToString() + "&_=" + timestamp;
-                        var response = await SendCurlRequest(url, cookies);
+                        await SendCurlRequest(url, cookies);
                         await Task.Delay(1000);
                         int new_points = await GetSeedBonus(cookies, mam_uid);
-                        AppendLog($"After spending, new points: {new_points}");
+                        AppendLog($"After purchase, points: {new_points}");
                         if (new_points < points)
                         {
                             points = new_points;
                             totalUploadGB += gb;
-                            int runPointsSpentFinal = initial_points - points;
-                            AppendLog($"Total points spent in this run: {runPointsSpentFinal}");
                         }
                         else
                         {
-                            AppendLog("Points did not change - spending failed.");
+                            AppendLog("Purchase did not reduce points - aborting.");
                             return;
                         }
                     }
                 }
-                int runPointsSpentFinalOverall = initial_points - points;
-                cumulativePointsSpent += runPointsSpentFinalOverall;
-                this.Invoke(new Action(() =>
-                {
-                    labelCumulativePointsValue.Text = cumulativePointsSpent.ToString();
-                }));
-                UpdateTotals(totalUploadGB, 0);
-                SetNextRun(DateTime.Now.AddHours(nextRunHours));
+
+                AppendLog("=== Summary ===");
+                AppendLog($"VIP Purchase: {(vipBought ? "Yes" : "No")}");
+                AppendLog($"Total Upload GB Purchased: {totalUploadGB} GB");
             }
             catch (Exception ex)
             {

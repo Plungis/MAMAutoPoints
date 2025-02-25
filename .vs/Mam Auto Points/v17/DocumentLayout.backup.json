@@ -3,6 +3,10 @@
   "WorkspaceRootPath": "C:\\Users\\randy\\source\\repos\\Mam Auto Points\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{4B309EEE-2363-44F0-BD45-4F011CF4BA05}|Mam Auto Points\\Mam Auto Points.csproj|c:\\users\\randy\\source\\repos\\mam auto points\\mam auto points\\mam auto points.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{4B309EEE-2363-44F0-BD45-4F011CF4BA05}|Mam Auto Points\\Mam Auto Points.csproj|solutionrelative:mam auto points\\mam auto points.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{4B309EEE-2363-44F0-BD45-4F011CF4BA05}|Mam Auto Points\\Mam Auto Points.csproj|c:\\users\\randy\\source\\repos\\mam auto points\\mam auto points\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{4B309EEE-2363-44F0-BD45-4F011CF4BA05}|Mam Auto Points\\Mam Auto Points.csproj|solutionrelative:mam auto points\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
@@ -14,21 +18,34 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 0,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Mam Auto Points",
+              "DocumentMoniker": "C:\\Users\\randy\\source\\repos\\Mam Auto Points\\Mam Auto Points\\Mam Auto Points.csproj",
+              "RelativeDocumentMoniker": "Mam Auto Points\\Mam Auto Points.csproj",
+              "ToolTip": "C:\\Users\\randy\\source\\repos\\Mam Auto Points\\Mam Auto Points\\Mam Auto Points.csproj",
+              "RelativeToolTip": "Mam Auto Points\\Mam Auto Points.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-02-25T20:52:48.531Z",
+              "EditorCaption": ""
+            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "Form1.cs",
               "DocumentMoniker": "C:\\Users\\randy\\source\\repos\\Mam Auto Points\\Mam Auto Points\\Form1.cs",
               "RelativeDocumentMoniker": "Mam Auto Points\\Form1.cs",
               "ToolTip": "C:\\Users\\randy\\source\\repos\\Mam Auto Points\\Mam Auto Points\\Form1.cs",
               "RelativeToolTip": "Mam Auto Points\\Form1.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAACEAAAAKAAAAAAAAAA==",
+              "ViewState": "AgIAACwDAAAAAAAAAADwvzEDAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-02-13T19:20:47.586Z",
               "EditorCaption": ""
