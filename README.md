@@ -11,7 +11,6 @@ MAMAutoPoints is a Windows Forms application that automates the spending of bonu
 - [Usage](#usage)
   - [Creating Your Cookie File](#creating-your-cookie-file)
   - [Configuring Settings](#configuring-settings)
-- [Release Notes](#release-notes)
 - [Contributing](#contributing)
 - [License](#license)
 - [Contact](#contact)
