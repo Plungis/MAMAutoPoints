@@ -93,7 +93,7 @@ Click **"Run Script"** to start the automation process. The log output will disp
 
 ---
 
-### v1.1 Changelog
+### v1.1 Release Notes
 
 - **Default Settings:**  
   - Points Buffer remains set to a default value of `10000`.
