@@ -36,6 +36,7 @@ namespace MAMAutoPoints
         private System.Windows.Forms.Timer timerCountdown = null!;
         private DateTime? nextRunTime = null;
         private int cumulativePointsSpent = 0;
+        private int cumulativeUploadGB = 0;  // New field to accumulate total GB bought
 
         private GroupBox groupBoxUserInfo = null!;
         private Label labelUserName = null!;
@@ -724,6 +725,7 @@ namespace MAMAutoPoints
             automationRunning = true;
             bool vipBought = false;
             int totalUploadGB = 0;
+            int initialPoints = 0;
 
             try
             {
@@ -741,6 +743,7 @@ namespace MAMAutoPoints
                 AppendLog("Existing session valid.");
                 AppendLog("Collecting current points.");
                 int points = await GetSeedBonus(cookies, mam_uid);
+                initialPoints = points; // Save initial points for calculation later.
                 if (points == 0)
                 {
                     AppendLog("Failed to get number of bonus points - aborting.");
@@ -800,9 +803,23 @@ namespace MAMAutoPoints
                     }
                 }
 
+                // Calculate and update cumulative points spent.
+                int runPointsSpent = initialPoints - points;
+                cumulativePointsSpent += runPointsSpent;
+                this.Invoke(new Action(() =>
+                {
+                    labelCumulativePointsValue.Text = cumulativePointsSpent.ToString();
+                }));
+
+                // Accumulate the GB bought across runs
+                cumulativeUploadGB += totalUploadGB;
+                UpdateTotals(cumulativeUploadGB, 0);
+
                 AppendLog("=== Summary ===");
                 AppendLog($"VIP Purchase: {(vipBought ? "Yes" : "No")}");
-                AppendLog($"Total Upload GB Purchased: {totalUploadGB} GB");
+                AppendLog($"Total Upload GB Purchased (this run): {totalUploadGB} GB");
+                AppendLog($"Cumulative Upload GB Purchased: {cumulativeUploadGB} GB");
+                AppendLog($"Points Spent This Run: {runPointsSpent}");
             }
             catch (Exception ex)
             {

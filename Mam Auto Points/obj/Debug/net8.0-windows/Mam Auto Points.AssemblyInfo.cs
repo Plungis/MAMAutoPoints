@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Mam Auto Points")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a41105bb64c63c96532d1f1657c3b8b2d65f5945")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+630e3119b85b439677eb96a052dc8ae0529b2bdc")]
 [assembly: System.Reflection.AssemblyProductAttribute("Mam Auto Points")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Mam Auto Points")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
